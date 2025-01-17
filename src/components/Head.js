@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom';
 import { toggleMenu } from '../utils/appSlice';
 import { YOUTUBE_SEARCH_API } from '../utils/constants';
 import { cacheResults } from '../utils/searchSlice';
@@ -44,6 +45,12 @@ const Head = () => {
             }
         ));
     }
+
+    // const handleSuggestions = (event) => {
+    //     setSearchQuery(event.target.innerText);
+    //     setShowSuggestions(false);
+    //     navigate('/results?search_query=' + encodeURI(event.target.innerText));
+    //  }
 
     const toggleMenuHandler = () => {
         dispatch(toggleMenu());
