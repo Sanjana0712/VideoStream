@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@faker-js/faker": "^9.4.0",
     "@reduxjs/toolkit": "^2.5.0",
     "cra-template": "1.2.0",
     "immer": "^10.1.1",

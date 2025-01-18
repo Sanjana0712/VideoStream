@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addMessage } from '../utils/chatSlice';
+import {faker} from '@faker-js/faker';
 
 const LiveChat = () => {
     const [input, setInput] = useState("");
@@ -8,11 +9,25 @@ const LiveChat = () => {
     const dispatch = useDispatch();
     const messages = useSelector((store) => store.chat.messages);
 
+    const randomMessages = [
+        "Great video!",
+        "Loved the content!",
+        "Keep it up!",
+        "This is so helpful!",
+        "Amazing explanation!",
+        "I have a question about this.",
+        "Can you share more details?",
+        "Nice editing skills!",
+        "Subscribing now!",
+        "Thanks for this tutorial!",
+      ];
+
     useEffect(() => {
         //Long Polling
         const interval = setInterval(() => {
-            const botMessage = `Hello! Good Video!`;
-            dispatch(addMessage({ user: `User${Math.floor(Math.random() * 100)}`, text: botMessage }));
+            const randomName = faker.internet.userName();
+            const botMessage = randomMessages[Math.floor(Math.random() * randomMessages.length)];;
+            dispatch(addMessage({ user: randomName, text: botMessage }));
         }, 3000);
 
         return () => clearInterval(interval);
@@ -43,12 +58,12 @@ const LiveChat = () => {
                         </button>
                     </div>
 
-                    <div className="h-64 overflow-y-scroll flex flex-col-reverse">
+                    <div className="h-64 w-[100%] self-start overflow-y-scroll flex flex-col-reverse">
                         {messages.map((msg, index) => (
                             <div
                                 key={index}
-                                className={`p-3 rounded-lg flex items-center ${msg.user === "You" ? "bg-blue-100 self-end" : "bg-gray-100 self-start"}`}
-                                style={{ width: "80%", marginBottom: "10px" }} // Set a fixed width
+                                className={`p-3 rounded-lg flex items-center ${msg.user === "You" ? "bg-blue-100 self-start" : "bg-gray-100 self-start"}`}
+                                style={{ width: "80%", marginBottom: "10px" }} 
                             >
                                 <div className="text-sm font-semibold mr-2">{msg.user}:</div>
                                 <div className="text-md">{msg.text}</div>
@@ -56,7 +71,7 @@ const LiveChat = () => {
                         ))}
                     </div>
 
-                    <div className="mt-4 flex w-full">
+                    <div className="mt-[100px] flex w-full">
                         <input
                             className="flex-grow border border-gray-300 p-2 rounded-l-lg"
                             type="text"
